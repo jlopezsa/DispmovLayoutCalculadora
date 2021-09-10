@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private Button boton_2;
     private Button boton_3;
     private Button boton_mas;
+    //private Button boton_igual;
     private String numero_pantalla="";
     private double operador;
     private double resultado;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         boton_2 = (Button) findViewById(R.id.btn2);
         boton_3 = (Button) findViewById(R.id.btn3);
         boton_mas = (Button) findViewById(R.id.btn_mas);
+        //boton_igual = (Button) findViewById(R.id.btn_igual);
 
         pantalla.setText("0");
 
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         boton_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Método donde se implementan las acciones que deben ser realizadas al oprimir un boton
                 pantalla.setText(numero_pantalla+"1");
                 numero_pantalla = pantalla.getText().toString();
             }
@@ -68,5 +71,17 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("FLAG(dentro)","" + resultado);
             }
         });
+
+        /*boton_igual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //operador = Double.parseDouble(numero_pantalla);
+                numero_pantalla = String.valueOf(resultado);
+                pantalla.setText(numero_pantalla);
+                resultado = 0;
+                operador = 0;
+                numero_pantalla = "";
+            }
+        });*/
     }
 }
