@@ -15,10 +15,12 @@ public class MainActivity extends AppCompatActivity {
     private Button boton_2;
     private Button boton_3;
     private Button boton_mas;
+    private Button boton_menos;
     //private Button boton_igual;
     private String numero_pantalla="";
     private double operador;
     private double resultado;
+    private int flag_sig=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         boton_2 = (Button) findViewById(R.id.btn2);
         boton_3 = (Button) findViewById(R.id.btn3);
         boton_mas = (Button) findViewById(R.id.btn_mas);
+        boton_menos = (Button) findViewById(R.id.btn_menos);
+
         //boton_igual = (Button) findViewById(R.id.btn_igual);
 
         pantalla.setText("0");
@@ -72,6 +76,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        boton_menos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                operador = Double.parseDouble(numero_pantalla);
+
+                if(flag_sig == 0){
+                    resultado = resultado + operador;
+                }else{
+                    resultado = resultado - operador;
+                }
+                flag_sig = 1;
+
+                pantalla.setText("0");
+                numero_pantalla = "";
+                Log.i("FLAG(dentro)","" + resultado);
+            }
+        });
+
         /*boton_igual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,5 +105,20 @@ public class MainActivity extends AppCompatActivity {
                 numero_pantalla = "";
             }
         });*/
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        outState.putDouble("RESULTADO",resultado);
+        outState.putString("NUMERO_PANTALLA",numero_pantalla);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        resultado = savedInstanceState.getDouble("RESULTADO");
+        numero_pantalla = savedInstanceState.getString("NUMERO_PANTALLA");
+        pantalla.setText(numero_pantalla);
     }
 }
